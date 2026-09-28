@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>AtomSigNet</title>
+    <meta
+      name="description"
+      content="AtomSigNet treats wearable biosignals as a sequence of irreducible atoms governed by a Markovian Reasoning Engine, repairing logic gaps with diffusion-synthesized bridge atoms for affect recognition."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Adaptive Multimodal Affective Computing for Incomplete Sensing via Generative Biosignal Diffusion" />
+    <meta
+      property="og:description"
+      content="Affect recognition from wearable biosignals with atomic decomposition, reasoning-guided diffusion and Markovian test-time scaling."
+    />
+    <meta property="og:image" content="https://multimodal-human-sensing.github.io/atomsignet/media/figures/architecture.png" />
+    <meta property="og:url" content="https://multimodal-human-sensing.github.io/atomsignet/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f3f5f4" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <style>
+      html { background: #f3f5f4; }
+      body { opacity: 0; animation: page-failsafe 0s 4s forwards; }
+      html[data-ready] body { opacity: 1; transition: opacity 0.4s ease; }
+      html:not([data-ready]) body * { animation-play-state: paused; }
+      @keyframes page-failsafe { to { opacity: 1; } }
+    </style>
+    <noscript><style>body { opacity: 1; }</style></noscript>
+    <script type="module" crossorigin src="./assets/index-D9wV3bxF.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CFfWbppO.css">
+  </head>
+
+  <body>
+    <a class="skip-link" href="#overview">Skip to content</a>
+
+    <header class="topbar" data-scrolled="false">
+      <div class="topbar__inner">
+        <a class="topbar__brand" href="#top" aria-label="Back to top"><img class="topbar__logo" src="./favicon.svg" alt="" width="34" height="34" /></a>
+        <nav class="topbar__nav" aria-label="Sections">
+          <a href="#overview" data-priority>Overview</a>
+          <a href="#how">How It Works</a>
+          <a href="#video">Interface</a>
+          <a href="#modalities">Modalities</a>
+          <a href="#method" data-priority>Architecture</a>
+          <a href="#spec">Under the Hood</a>
+          <a href="#results" data-priority>Results</a>
+          <a href="#references" data-priority>Cite</a>
+        </nav>
+      </div>
+      <div class="progress" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__stage hero__stage--film" data-hero-stage>
+          <canvas class="hero__film hero__film--canvas" data-hero-canvas width="1280" height="720" aria-hidden="true"></canvas>
+          <video class="hero__film hero__film--source" data-hero-film autoplay muted loop playsinline preload="auto" poster="./media/hero/atomsignet-poster.jpg" aria-label="AtomSigNet animation: BVP, EDA and temperature traces morph into a chain of physiological atoms; a corrupted atom is flagged, scanned in context and repaired">
+            <source src="./media/hero/atomsignet.webm" type="video/webm" />
+            <source src="./media/hero/atomsignet.mp4" type="video/mp4" />
+          </video>
+          <div class="hero__phase" data-hero-phase aria-live="polite">
+            <div class="phase" data-phase-card data-tone="signal">
+              <div class="phase__top">
+                <span class="phase__index" data-phase-index>01 / 05</span>
+                <span class="phase__stage">Stage</span>
+              </div>
+              <div class="phase__body" data-phase-body>
+                <b class="phase__title" data-phase-title>Wearable Biosignals</b>
+                <p class="phase__text" data-phase-text>BVP, EDA and temperature traces stream in from the wrist.</p>
+              </div>
+              <i class="phase__bar" aria-hidden="true"><span data-phase-bar></span></i>
+            </div>
+          </div>
+          <div class="flat" aria-label="Live wearable biosignals" hidden>
+            <div class="flat__head"><span class="flat__rec"><b aria-hidden="true"></b>Biosignals</span><span>BVP · EDA · TEMP</span></div>
+            <canvas class="flat__traces" data-flat-traces aria-hidden="true"></canvas>
+            <div class="flat__foot"><span class="flat__state"><i data-flat-dot aria-hidden="true"></i><span data-flat-state>Encoding</span></span><span>signals → atoms → repair</span></div>
+          </div>
+        </div>
+
+        <div class="hero__copy wrap">
+          <h1 class="hero__heading" id="hero-title" data-subtitle></h1>
+          <div class="hero__authors" data-authors></div>
+        </div>
+      </section>
+
+      <section class="band" id="overview" aria-labelledby="overview-title">
+        <div class="wrap overview">
+          <div class="overview__main">
+            <h2 id="overview-title">Research Overview</h2>
+            <p class="overview__lede" data-overview-lede></p>
+            <ol class="overview__points" data-overview-points></ol>
+          </div>
+          <div class="overview__results">
+            <h3 class="overview__results-title">Key Results</h3>
+            <dl class="stats" data-facts></dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--sunken" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <div class="band__head">
+            <h2 id="how-title">From Raw Biosignals To An Affective Read In Three Steps</h2>
+            <p class="lede">Each physiological stream is treated as a sequence of irreducible atoms. The engine checks that every transition makes sense, repairs the ones that don’t, and scales its own reasoning to the difficulty of the interval.</p>
+          </div>
+          <ol class="how">
+            <li class="how__step">
+              <span class="how__num">01</span>
+              <h3 class="how__title">Atomize</h3>
+              <p class="how__text">Per-sensor TCNs, cross-modal attention, and a Variational Information Bottleneck transform BVP, EDA, and temperature into compact physiological atoms that preserve affect-relevant autonomic dynamics while suppressing noise.</p>
+            </li>
+            <li class="how__step">
+              <span class="how__num">02</span>
+              <h3 class="how__title">Bridge</h3>
+              <p class="how__text">The Markovian Reasoning Engine detects logic gaps and inconsistent multimodal transitions. Context-conditioned diffusion synthesizes bridge atoms to restore continuity, while high-integrity contradictions are retained as novel patterns for classifier fine-tuning.</p>
+            </li>
+            <li class="how__step">
+              <span class="how__num">03</span>
+              <h3 class="how__title">Scale</h3>
+              <p class="how__text">At inference, Markovian test-time scaling adapts diffusion depth to contradiction severity, enabling targeted self-correction on difficult or noisy intervals without the memory overhead of conventional temporal models.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="band" id="video" aria-labelledby="video-title">
+        <div class="wrap">
+          <div class="band__head band__head--centered">
+            <h2 id="video-title">Interactive Reasoning Console</h2>
+            <p class="lede">An interactive visualization of AtomSigNet’s atom-level reasoning, contradiction detection, diffusion-based repair, and affect prediction across time.</p>
+          </div>
+          <figure class="video" data-video></figure>
+        </div>
+      </section>
+
+      <section class="band band--sunken" id="modalities" aria-labelledby="modalities-title">
+        <div class="wrap">
+          <div class="band__head band__head--centered">
+            <h2 id="modalities-title">Contradictory Emotions Across Modalities</h2>
+            <p class="lede">The console reads the visual, acoustic and physiological streams separately and shows where they conflict instead of collapsing them into a single label.</p>
+          </div>
+          <div class="modalities" data-modalities></div>
+        </div>
+      </section>
+
+      <section class="band" id="method" aria-labelledby="method-title">
+        <div class="wrap">
+          <div class="band__head">
+            <h2 id="method-title">AtomSigNet: Reading Biosignal One Atom At A Time</h2>
+            <p class="lede">The wearable stream is broken into short atomic units. A diffusion model fills in atoms that don’t fit the sequence around them, and at test time the model keeps refining until the sequence holds together before the affect classifier makes its call.</p>
+          </div>
+          <div class="pipeline" data-pipeline>
+            <div class="pipeline__sticky">
+              <div class="pipeline__diagram" data-pipeline-diagram></div>
+            </div>
+            <ol class="pipeline__steps" data-pipeline-steps></ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--sunken" id="spec" aria-labelledby="spec-title">
+        <div class="wrap">
+          <div class="band__head">
+            <h2 id="spec-title">Real-Time Multimodal Inference Stack</h2>
+            <p class="lede">Implementation details of the end-to-end sensing, affect inference, and visualization pipeline. Core video, audio, and physiological inference runs locally. Only the optional natural-language summary is generated externally.</p>
+          </div>
+          <div class="specs" data-specs></div>
+        </div>
+      </section>
+
+      <section class="band" id="results" aria-labelledby="results-title">
+        <div class="wrap">
+          <div class="band__head">
+            <h2 id="results-title">State Of The Art On WESAD And CASE</h2>
+            <p class="lede">AtomSigNet outperforms existing supervised and self-supervised models on both benchmarks, and fine-tuning with synthesized samples amounting to less than 1% of the training set is already competitive with state-of-the-art baselines.</p>
+          </div>
+          <div class="scores">
+            <div class="score"><span class="score__value">91.60%</span><span class="score__metric">Accuracy</span><span class="score__set">WESAD · Emotion-3</span></div>
+            <div class="score"><span class="score__value">83.15%</span><span class="score__metric">Accuracy</span><span class="score__set">CASE · Valence-3</span></div>
+            <div class="score"><span class="score__value">96.97%</span><span class="score__metric">Accuracy</span><span class="score__set">CASE · Arousal-3</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--sunken" id="acknowledgements" aria-labelledby="ack-title">
+        <div class="wrap">
+          <div class="band__head band__head--centered">
+            <h2 id="ack-title">Acknowledgements</h2>
+          </div>
+          <div class="funding-row">
+            <div class="funding-card funding-card--logo-only">
+              <div class="funding-card__logo">
+                <img src="./media/brand/nystar.png" alt="NYSTAR: Empire State Development, Division of Science, Technology and Innovation" width="1200" height="509" loading="lazy" />
+              </div>
+            </div>
+            <div class="funding-card funding-card--logo-only funding-card--nsf">
+              <div class="funding-card__logo">
+                <img src="./media/brand/nsf.png" alt="National Science Foundation" width="224" height="225" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="references" aria-labelledby="references-title">
+        <div class="wrap">
+          <div class="band__head">
+            <h2 id="references-title">Citing This Work</h2>
+            <p class="lede">If you use or build upon this work, please cite the corresponding publication(s) from our related work listed below.</p>
+          </div>
+          <div class="refs" data-acknowledgements></div>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
